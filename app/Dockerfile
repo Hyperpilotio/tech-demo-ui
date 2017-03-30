@@ -1,14 +1,16 @@
-FROM node:6
+FROM node:6-alpine
 
-RUN wget https://yarnpkg.org/latest.tar.gz && \
-    tar -xf latest.tar.gz && \
-    mv dist /opt/yarn
+RUN apk add --update nginx openssl
+RUN wget http://yarnpkg.org/latest.tar.gz && \
+    tar -xzf latest.tar.gz
 
-ENV PATH $PATH:/opt/yarn/bin
+ENV PATH $PATH:/dist/bin
 
-ADD . /home/app
+COPY . /home/app
 WORKDIR /home/app
 
 RUN yarn install && yarn build
 
-CMD yarn start
+COPY nginx.conf /etc/nginx/nginx.conf
+
+CMD ./run.sh
