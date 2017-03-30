@@ -1,0 +1,260 @@
+{
+    "dashboard": {
+        "__inputs": [
+            {
+                "name": "DS_INFLUXDB",
+                "label": "snap",
+                "description": "",
+                "type": "datasource",
+                "pluginId": "influxdb",
+                "pluginName": "InfluxDB"
+            }
+        ],
+        "__requires": [
+            {
+                "type": "grafana",
+                "id": "grafana",
+                "name": "Grafana",
+                "version": "4.1.2"
+            },
+            {
+                "type": "panel",
+                "id": "graph",
+                "name": "Graph",
+                "version": ""
+            },
+            {
+                "type": "datasource",
+                "id": "influxdb",
+                "name": "InfluxDB",
+                "version": "1.0.0"
+            }
+        ],
+        "annotations": {
+            "list": []
+        },
+        "editable": true,
+        "gnetId": null,
+        "graphTooltip": 0,
+        "hideControls": false,
+        "id": null,
+        "links": [],
+        "refresh": false,
+        "rows": [
+            {
+                "collapse": false,
+                "height": "250px",
+                "panels": [
+                    {
+                        "aliasColors": {},
+                        "bars": false,
+                        "datasource": "${DS_INFLUXDB}",
+                        "fill": 2,
+                        "id": 2,
+                        "interval": ">10s",
+                        "legend": {
+                            "alignAsTable": false,
+                            "avg": false,
+                            "current": false,
+                            "hideEmpty": false,
+                            "max": false,
+                            "min": false,
+                            "rightSide": false,
+                            "show": false,
+                            "total": false,
+                            "values": false
+                        },
+                        "lines": true,
+                        "linewidth": 1,
+                        "links": [],
+                        "minSpan": 4,
+                        "nullPointMode": "connected",
+                        "percentage": false,
+                        "pointradius": 1,
+                        "points": false,
+                        "renderer": "flot",
+                        "repeat": "cont_name",
+                        "seriesOverrides": [],
+                        "span": 4,
+                        "stack": true,
+                        "steppedLine": false,
+                        "targets": [
+                            {
+                                "dsType": "influxdb",
+                                "groupBy": [
+                                    {
+                                        "params": [
+                                            "auto"
+                                        ],
+                                        "type": "time"
+                                    }
+                                ],
+                                "measurement": "intel/docker/stats/cgroups/memory_stats/usage/usage",
+                                "policy": "default",
+                                "query": "SELECT mean(\"value\") FROM \"intel/docker/stats/cgroups/memory_stats/usage/usage\" WHERE \"io.kubernetes.container.name\" =~ /^$cont_name$/ AND $timeFilter GROUP BY time($interval), \"io.kubernetes.container.name\"",
+                                "rawQuery": false,
+                                "refId": "A",
+                                "resultFormat": "time_series",
+                                "select": [
+                                    [
+                                        {
+                                            "params": [
+                                                "value"
+                                            ],
+                                            "type": "field"
+                                        },
+                                        {
+                                            "params": [],
+                                            "type": "mean"
+                                        }
+                                    ]
+                                ],
+                                "tags": [
+                                    {
+                                        "key": "io.kubernetes.container.name",
+                                        "operator": "=~",
+                                        "value": "/^$cont_name$/"
+                                    },
+                                    {
+                                        "condition": "AND",
+                                        "key": "nodename",
+                                        "operator": "=~",
+                                        "value": "/^$node_name$/"
+                                    }
+                                ],
+                                "target": ""
+                            }
+                        ],
+                        "thresholds": [],
+                        "timeFrom": null,
+                        "timeShift": null,
+                        "title": "Memory Usage $cont_name",
+                        "tooltip": {
+                            "shared": false,
+                            "sort": 0,
+                            "value_type": "cumulative"
+                        },
+                        "type": "graph",
+                        "xaxis": {
+                            "mode": "time",
+                            "name": null,
+                            "show": true,
+                            "values": []
+                        },
+                        "yaxes": [
+                            {
+                                "format": "decbytes",
+                                "label": null,
+                                "logBase": 1,
+                                "max": null,
+                                "min": null,
+                                "show": true
+                            },
+                            {
+                                "format": "short",
+                                "label": null,
+                                "logBase": 1,
+                                "max": null,
+                                "min": null,
+                                "show": true
+                            }
+                        ]
+                    }
+                ],
+                "repeat": "node_name",
+                "repeatIteration": null,
+                "repeatRowId": null,
+                "showTitle": true,
+                "title": "Containers Of $node_name",
+                "titleSize": "h6"
+            }
+        ],
+        "schemaVersion": 14,
+        "style": "dark",
+        "tags": [],
+        "templating": {
+            "list": [
+                {
+                    "allValue": null,
+                    "current": {},
+                    "datasource": "${DS_INFLUXDB}",
+                    "hide": 0,
+                    "includeAll": true,
+                    "label": "Node",
+                    "multi": true,
+                    "name": "node_name",
+                    "options": [],
+                    "query": "SHOW TAG VALUES WITH KEY = \"nodename\"",
+                    "refresh": 1,
+                    "regex": "",
+                    "sort": 0,
+                    "tagValuesQuery": "",
+                    "tags": [],
+                    "tagsQuery": "",
+                    "type": "query",
+                    "useTags": false
+                },
+                {
+                    "allValue": null,
+                    "current": {},
+                    "datasource": "${DS_INFLUXDB}",
+                    "hide": 0,
+                    "includeAll": true,
+                    "label": "Container Name",
+                    "multi": true,
+                    "name": "cont_name",
+                    "options": [],
+                    "query": "SHOW TAG VALUES WITH KEY = \"io.kubernetes.container.name\" WHERE \"io.kubernetes.pod.namespace\" != 'kube-system' AND \"io.kubernetes.container.name\" != 'POD' AND \"nodename\" =~ /^$node_name$/",
+                    "refresh": 1,
+                    "regex": "",
+                    "sort": 0,
+                    "tagValuesQuery": "",
+                    "tags": [],
+                    "tagsQuery": "",
+                    "type": "query",
+                    "useTags": false
+                }
+            ]
+        },
+        "time": {
+            "from": "now-30m",
+            "to": "now"
+        },
+        "timepicker": {
+            "refresh_intervals": [
+                "5s",
+                "10s",
+                "30s",
+                "1m",
+                "5m",
+                "15m",
+                "30m",
+                "1h",
+                "2h",
+                "1d"
+            ],
+            "time_options": [
+                "5m",
+                "15m",
+                "1h",
+                "6h",
+                "12h",
+                "24h",
+                "2d",
+                "7d",
+                "30d"
+            ]
+        },
+        "timezone": "browser",
+        "title": "Memory Usage",
+        "version": 3
+    },
+    "inputs": [
+        {
+            "name": "DS_INFLUXDB",
+            "pluginId": "influxdb",
+            "type": "datasource",
+            "value": "snap"
+        }
+    ]
+}
