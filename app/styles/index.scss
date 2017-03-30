@@ -1,12 +1,18 @@
 @import "bulma/bulma.sass";
 @import "animate.css";
 
-@keyframes slideOutUp {
+@keyframes fadeOut {
   from {
-    transform: translate3d(0, 0, 0);
+    opacity: 1;
+    visibility: visible;
   }
-
   to {
-    transform: translate3d(0, -125%, 0);
+    opacity: 0;
+    visibility: hidden;
   }
+}
+
+.demo-content {
+  flex-direction: column;
+  width: 100%;
 }
