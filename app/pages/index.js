@@ -9,11 +9,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      demoStage: 0,
-      content: {
-        title: "Welcome to Hyperpilot!",
-        subtitle: "Amet est alias tempora prcorrupti?"
-      }
+      demoStage: 0
     };
   }
 
