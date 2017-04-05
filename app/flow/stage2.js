@@ -5,7 +5,7 @@ import PanelsLayout from "./PanelsLayout"
 
 export default ({moveToNextStage}) => (
   <PanelsLayout>
-    <h1 className="title has-text-centered is-spaced">Example Service-Based App</h1>
+    <h1 className="title has-text-centered is-spaced">The Impact</h1>
     <h2 className="subtitle">
       <content>
         <div>

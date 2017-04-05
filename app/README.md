@@ -41,3 +41,4 @@ This will add an endpoint to the app at `/actions/example`, which pipes the JSON
 - The function accepts an object as an input, which contains a `req` object and a `returnJson` function. `req` is the standard `http.IncomingMessage` object; and `writeJson` is a function that helps you send a response containing the input object as JSON. (So basically you **have to** return a JSON)
 - The actions folder API currenty doesn't support different HTTP methods, it makes no difference.
 - Our webpack currently does not include the files of this folder, so you'll have to re-run `yarn run dev` in order to see the changes you've made to `actions/` folder.
+- With the same reason as the previous note, the scripts inside `actions/` folder cannot use some of the ES6 features such as import/export.
