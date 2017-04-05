@@ -1,28 +1,28 @@
-const { createServer } = require('http')
-const { parse } = require('url')
-const next = require('next')
+const { createServer } = require('http');
+const { parse } = require('url');
+const next = require('next');
 
-const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev })
-const handle = app.getRequestHandler()
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
 
 app.prepare()
 .then(() => {
   createServer((req, res) => {
-    const parsedUrl = parse(req.url, true)
-    const { pathname, query } = parsedUrl
+    const parsedUrl = parse(req.url, true);
+    const { pathname, query } = parsedUrl;
     if (pathname.startsWith("/grafana")) {
       res.end("Will be replaced by a Grafana panel");
-      return
+      return;
     }
     if (pathname.startsWith("/actions/")) {
       try {
 
         const handler = require(`.${pathname}`);
         res.setHeader("Content-Type", "application/json");
-        handler({ req, returnJson: (responseJson) => {
-          res.end(JSON.stringify(responseJson));
-        }});
+        handler({ parsedUrl, req, res,
+                  returnJson: (json) => res.end(JSON.stringify(json))
+        });
 
       } catch (e) {
 
@@ -42,7 +42,7 @@ app.prepare()
     handle(req, res, parsedUrl);
   })
   .listen(3000, (err) => {
-    if (err) throw err
-    console.log('> Ready on http://localhost:3000')
-  })
-})
+    if (err) throw err;
+    console.log('> Ready on http://localhost:3000');
+  });
+});
