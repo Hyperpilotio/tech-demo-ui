@@ -1,6 +1,18 @@
 # Tech Demo UI App
 
-## Setup
+## Usage
+
+### Docker
+`docker build -t {image name} .` or `docker pull adrianliaw/hyperpilot-demo-ui`  
+**Note that you should access the 8080 port**
+
+### App Structure
+- `/`: Demo app
+- `/actions/*`: Endpoints for invoking REST calls or running CLIs
+- `/grafana/*`: Proxied Grafana
+
+
+## Development
 
 ### Dependencies
 - Node.js v6.x
