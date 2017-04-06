@@ -1,9 +1,8 @@
-import React from "react"
-import Head from "next/head"
-import Router from "next/router"
-import classNames from "classnames"
-import stylesheet from 'styles/index.scss'
-import PanelsLayout from '../flow/PanelsLayout'
+import React from "react";
+import Head from "next/head";
+import Router from "next/router";
+import PanelsLayout from '../components/PanelsLayout';
+import stylesheet from 'styles/index.scss';
 
 
 export default class App extends React.Component {
@@ -11,7 +10,7 @@ export default class App extends React.Component {
   static async getInitialProps({ req, query }) {
     if (req !== undefined)
       query.stage = 0;
-    return { demoStage: parseInt(query.stage || "0") }
+    return { demoStage: parseInt(query.stage || "0") };
   }
 
   render() {
@@ -20,9 +19,8 @@ export default class App extends React.Component {
     try {
       mod = require(`../flow/stage${this.props.demoStage}`);
     } catch (e) {
-      if (e.message.startsWith("Cannot find module")) {
+      if (e.message.startsWith("Cannot find module"))
         mod = { default: "div" };
-      }
     }
     const Stage = mod.default;
     const Layout = Stage.Layout || PanelsLayout;

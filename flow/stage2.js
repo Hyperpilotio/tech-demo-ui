@@ -1,5 +1,5 @@
-import ContinueButton from "./ContinueButton"
-import fetch from "isomorphic-fetch"
+import ContinueButton from "../components/ContinueButton";
+import fetch from "isomorphic-fetch";
 
 
 export default ({moveToNextStage}) => (
@@ -17,7 +17,7 @@ export default ({moveToNextStage}) => (
     </h2>
     <ContinueButton onClick={moveToNextStage}>Run Spark Jobs</ContinueButton>
   </div>
-);
+)
 
 export const beforeMovingOn = () => (
   fetch("/actions/run_spark")

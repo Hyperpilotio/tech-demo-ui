@@ -28,4 +28,4 @@ export default ({children}) => (
       </div>
     </section>
   </div>
-);
+)

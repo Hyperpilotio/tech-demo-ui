@@ -1,4 +1,4 @@
-import ContinueButton from "./ContinueButton"
+import ContinueButton from "../components/ContinueButton";
 
 
 export default ({moveToNextStage}) => (
@@ -17,4 +17,4 @@ export default ({moveToNextStage}) => (
     </h2>
     <ContinueButton onClick={moveToNextStage}>Enable Hyperpilot Controller</ContinueButton>
   </div>
-);
+)

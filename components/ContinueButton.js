@@ -21,4 +21,4 @@ export default class ContinueButton extends React.Component {
   setIsLoading() {
     this.setState({ isLoading: true });
   }
-};
+}

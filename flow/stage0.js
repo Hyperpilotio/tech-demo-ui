@@ -1,4 +1,4 @@
-import ContinueButton from "./ContinueButton"
+import ContinueButton from "../components/ContinueButton";
 
 let Stage = ({moveToNextStage}) => (
   <section className="hero is-primary is-bold is-fullheight">
