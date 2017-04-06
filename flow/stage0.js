@@ -1,5 +1,4 @@
-import React from "react"
-import stylesheet from 'styles/index.scss'
+import ContinueButton from "./ContinueButton"
 
 let Stage = ({moveToNextStage}) => (
   <section className="hero is-primary is-bold is-fullheight">
@@ -8,7 +7,7 @@ let Stage = ({moveToNextStage}) => (
         <div className="container has-text-centered">
           <h1 className="title">Welcome to Hyperpilot Tech Demo!</h1>
           <h2 className="subtitle">Demo focusing on mixing workloads</h2>
-          <a className="button is-primary is-inverted is-medium is-outlined" onClick={moveToNextStage}>Start Demo</a>
+          <ContinueButton onClick={moveToNextStage}>Start Demo</ContinueButton>
         </div>
       </div>
     </div>

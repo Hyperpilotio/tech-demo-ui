@@ -1,6 +1,4 @@
-import React from "react"
-import stylesheet from 'styles/index.scss'
-import PanelsLayout from "./PanelsLayout"
+import ContinueButton from "./ContinueButton"
 
 
 export default ({moveToNextStage}) => (
@@ -17,6 +15,6 @@ export default ({moveToNextStage}) => (
         </div>
       </content>
     </h2>
-    <a className="button is-primary is-inverted is-medium is-outlined" onClick={moveToNextStage}>Run microservice traffic</a>
+    <ContinueButton onClick={moveToNextStage}>Run microservice traffic</ContinueButton>
   </div>
 );
