@@ -15,8 +15,19 @@ export default class App extends React.Component {
   }
 
   render() {
-    const Stage = require(`../flow/stage${this.props.demoStage}`).default;
+
+    let mod;
+    try {
+      mod = require(`../flow/stage${this.props.demoStage}`);
+    } catch (e) {
+      if (e.message.startsWith("Cannot find module")) {
+        mod = { default: "div" };
+      }
+    }
+    const Stage = mod.default;
     const Layout = Stage.Layout || PanelsLayout;
+    const beforeMovingOn = mod.beforeMovingOn || (() => Promise.resolve());
+
     return (
       <div>
         <Head>
@@ -25,10 +36,16 @@ export default class App extends React.Component {
         </Head>
 
         <Layout>
-          <Stage moveToNextStage={() => Router.push({
-            pathname: "/",
-            query: { stage: this.props.demoStage + 1 }
-          })} />
+          <Stage moveToNextStage={() => {
+            beforeMovingOn()
+              .then(() => {
+                Router.push({
+                  pathname: "/",
+                  query: { stage: this.props.demoStage + 1 }
+                });
+              })
+            }
+          } />
         </Layout>
       </div>
     );
