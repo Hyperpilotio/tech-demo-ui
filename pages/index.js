@@ -44,6 +44,7 @@ export default class App extends React.Component {
                   query: { stage: this.props.demoStage + 1 }
                 });
               })
+              .catch(console.error);
             }
           } />
         </Layout>

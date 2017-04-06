@@ -1,4 +1,5 @@
 import ContinueButton from "./ContinueButton"
+import fetch from "isomorphic-fetch"
 
 
 export default ({moveToNextStage}) => (
@@ -16,4 +17,14 @@ export default ({moveToNextStage}) => (
     </h2>
     <ContinueButton onClick={moveToNextStage}>Run Spark Jobs</ContinueButton>
   </div>
+);
+
+export const beforeMovingOn = () => (
+  fetch("/actions/run_spark")
+    .then(res => res.json())
+    .then(json => {
+      if (!("stdout" in json && "stderr" in json))
+        throw new Error(`Run Spark Unsuccessful, response: ${JSON.stringify(json)}`);
+      return Promise.resolve(json);
+    })
 );

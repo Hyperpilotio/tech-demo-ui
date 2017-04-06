@@ -1,4 +1,5 @@
 import ContinueButton from "./ContinueButton"
+import fetch from "isomorphic-fetch"
 
 
 export default ({moveToNextStage}) => (
@@ -17,4 +18,14 @@ export default ({moveToNextStage}) => (
     </h2>
     <ContinueButton onClick={moveToNextStage}>Run microservice traffic</ContinueButton>
   </div>
+);
+
+export const beforeMovingOn = () => (
+  fetch("/actions/run_locust?locust_count=30&hatch_rate=30")
+    .then(res => res.json())
+    .then(json => {
+      if (json.success !== true)
+        throw new Error(`Run Locust Unsuccessful, response: ${JSON.stringify(json)}`);
+      return Promise.resolve(json);
+    })
 );
