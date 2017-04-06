@@ -10,7 +10,7 @@ export default ({moveToNextStage}) => (
         <p>With traffic running through the microservices, we see that CPU utilization remains resonably low.</p>
         <p>As travel varies, the cluster is provisioned to allow peak and spikes.</p>
         <p>To increase utilization without downsizing the cluster, we can run best effort batch jobs in the same cluster</p>
-        <p>Let's run best effort Spark jobs in the cluster.</p>
+        <p>Let us run best effort Spark jobs in the cluster.</p>
       </content>
     </h2>
     <ContinueButton onClick={moveToNextStage}>Run Spark Jobs</ContinueButton>
@@ -18,11 +18,6 @@ export default ({moveToNextStage}) => (
 )
 
 export const beforeMovingOn = () => (
-  fetch("/actions/run_spark")
-    .then(res => res.json())
-    .then(json => {
-      if (!("stdout" in json && "stderr" in json))
-        throw new Error(`Run Spark Unsuccessful, response: ${JSON.stringify(json)}`);
-      return Promise.resolve(json);
-    })
+  fetch("/actions/run_spark_load_controller")
+    .then(res => return Promise.resolve(res))
 );
