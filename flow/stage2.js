@@ -4,7 +4,7 @@ import PanelsLayout from "./PanelsLayout"
 
 
 export default ({moveToNextStage}) => (
-  <div>
+  <div className="animated fadeIn">
     <h1 className="title has-text-centered is-spaced">Traffic running with Microservice</h1>
     <h2 className="subtitle">
       <content>

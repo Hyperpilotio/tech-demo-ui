@@ -10,7 +10,7 @@ export default ({children}) => (
       <div className="hero-body">
         <div className="container demo-container">
           <div className="columns">
-            <div className="column is-4 animated fadeIn">
+            <div className="column is-4">
               {children}
             </div>
             <div className="column is-8">
