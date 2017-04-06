@@ -3,6 +3,8 @@ import Head from "next/head"
 import Router from "next/router"
 import classNames from "classnames"
 import stylesheet from 'styles/index.scss'
+import PanelsLayout from '../flow/PanelsLayout'
+
 
 export default class App extends React.Component {
 
@@ -14,6 +16,7 @@ export default class App extends React.Component {
 
   render() {
     const Stage = require(`../flow/stage${this.props.demoStage}`).default;
+    const Layout = Stage.Layout || PanelsLayout;
     return (
       <div>
         <Head>
@@ -21,10 +24,12 @@ export default class App extends React.Component {
           <style dangerouslySetInnerHTML={{ __html: stylesheet  }} />
         </Head>
 
-        <Stage moveToNextStage={() => Router.push({
-          pathname: "/",
-          query: { stage: this.props.demoStage + 1 }
-        })} />
+        <Layout>
+          <Stage moveToNextStage={() => Router.push({
+            pathname: "/",
+            query: { stage: this.props.demoStage + 1 }
+          })} />
+        </Layout>
       </div>
     );
   }

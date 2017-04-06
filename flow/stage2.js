@@ -4,7 +4,7 @@ import PanelsLayout from "./PanelsLayout"
 
 
 export default ({moveToNextStage}) => (
-  <PanelsLayout>
+  <div>
     <h1 className="title has-text-centered is-spaced">Traffic running with Microservice</h1>
     <h2 className="subtitle">
       <content>
@@ -17,5 +17,5 @@ export default ({moveToNextStage}) => (
       </content>
     </h2>
     <a className="button is-primary is-inverted is-medium is-outlined" onClick={moveToNextStage}>Run Spark Jobs</a>
-  </PanelsLayout>
+  </div>
 );
