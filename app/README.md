@@ -48,6 +48,11 @@ module.exports = ({ req, returnJson }) => {
 
 This will add an endpoint to the app at `/actions/example`, which pipes the JSON response from http://example.com/json
 
+Other examples:
+- `actions/run_locust.js`: Example of invoking REST API calls
+- `actions/run_spark.js`: Example of invoking CLI calls
+
+
 #### Notes
 
 - The function accepts an object as an input, which contains a `req` object and a `returnJson` function. `req` is the standard `http.IncomingMessage` object; and `writeJson` is a function that helps you send a response containing the input object as JSON. (So basically you **have to** return a JSON)
