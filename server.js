@@ -12,7 +12,7 @@ app.prepare()
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
 
-    if (dev && pathname.startsWith("/grafana")) {
+    if (dev && pathname.startsWith("/grafana/")) {
       res.end("Will be replaced by a Grafana panel");
       return;
     }
@@ -22,9 +22,13 @@ app.prepare()
 
         const handler = require(`.${pathname}`);
         res.setHeader("Content-Type", "application/json");
-        handler({ parsedUrl, req, res,
-                  returnJson: (json) => res.end(JSON.stringify(json))
-        });
+
+        const returnJson = (json) => res.end(JSON.stringify(json));
+        handler({ parsedUrl, req, res, returnJson })
+          .catch(reason => {
+            res.statusCode = 500;
+            returnJson(reason);
+          });
 
       } catch (e) {
 
