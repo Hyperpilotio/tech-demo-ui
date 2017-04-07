@@ -31,10 +31,7 @@ app.prepare()
               res.statusCode = 500;
               return Promise.resolve(reason);
             })
-            .then(response => {
-              if (!res.finished)
-                returnJson(response);
-            });
+            .then(returnJson);
         }
 
       } catch (e) {
