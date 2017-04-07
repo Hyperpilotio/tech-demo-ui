@@ -21,7 +21,7 @@ export const beforeMovingOn = () => (
   fetch("/actions/run_spark")
     .then(res => res.json())
     .then(json => {
-      if (!("stdout" in json && "stderr" in json))
+      if (!json.execSuccess)
         throw new Error(`Run Spark Unsuccessful, response: ${JSON.stringify(json)}`);
       return Promise.resolve(json);
     })

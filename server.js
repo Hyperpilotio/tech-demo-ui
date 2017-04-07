@@ -11,10 +11,12 @@ app.prepare()
   createServer((req, res) => {
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
-    if (pathname.startsWith("/grafana")) {
+
+    if (dev && pathname.startsWith("/grafana")) {
       res.end("Will be replaced by a Grafana panel");
       return;
     }
+
     if (pathname.startsWith("/actions/")) {
       try {
 

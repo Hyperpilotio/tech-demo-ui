@@ -1,5 +1,6 @@
-const path = require('path')
-const glob = require('glob')
+const path = require('path');
+const glob = require('glob');
+const webpack = require('webpack');
 
 module.exports = {
   webpack: (config, { dev }) => {
@@ -34,12 +35,20 @@ module.exports = {
               includePaths: ['styles', 'node_modules']
                 .map((d) => path.join(__dirname, d))
                 .map((g) => glob.sync(g))
-                .reduce((a, c) => a.concat(c), [])
+                .reduce((a, c) => a.concat(c), []),
+              data: `$env: ${process.env.NODE_ENV};`
             }
           }
         ]
       }
-    )
-    return config
+    );
+
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      })
+    );
+
+    return config;
   }
-}
+};

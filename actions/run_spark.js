@@ -12,7 +12,12 @@ module.exports = ({ returnJson }) => {
       }
     })
     .then(name => exec(`kubectl exec ${name} -n default -- ${RUN_SPARK_CMD}`))
-    .then(res => Promise.resolve({ stdout: res.stdout, stderr: res.stderr }))
+    .then(res => Promise.resolve({
+      stdout: res.stdout,
+      stderr: res.stderr,
+      execSuccess: true
+    }))
+    .catch(reason => Promise.resolve(reason))
     .then(returnJson);
 };
 
