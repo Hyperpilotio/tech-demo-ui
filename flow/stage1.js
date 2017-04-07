@@ -18,7 +18,4 @@ export default ({moveToNextStage}) => (
   </div>
 )
 
-export const beforeMovingOn = () => (
-  fetch("/actions/run_load_controller")
-    .then(res => return Promise.resolve(res))
-);
+export const beforeMovingOn = () => fetch("/actions/run_load_controller");
