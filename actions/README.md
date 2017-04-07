@@ -7,11 +7,10 @@ The actions folder uses the same concepts as next.js of "using file system as an
 ```javascript
 const fetch = require("node-fetch");
 
-module.exports = ({ req, returnJson }) => {
+module.exports = () => (
   fetch("http://example.com/json")
     .then(res => res.json())
-    .then(returnJson);
-};
+);
 ```
 
 This will add an endpoint to the app at `/actions/example`, which pipes the JSON response from http://example.com/json
@@ -34,20 +33,19 @@ The function accepts an object as the input, with the following schema:
 }
 ```
 
+The function should return a `Promise`, which eventually returns a JSON at the end of the chain. (Note that it's a `Promise` that resolves a JSON, you can use `res.json()` if you're using `fetch`, but should use `Promise.resolve(json)` if you have a custom JavaScript object).
+
+You don't have to call `returnJson` manually inside the function, but you can use it if you want to customize the flow of making response. If you want to customize the whole flow of making response, you can also don't return a `Promise`.
+
 ### Template
 
 ```javascript
 const fetch = require("node-fetch")
 
-module.exports = ({ parsedUrl, req, res, returnJson }) => {
+module.exports = ({ parsedUrl, req, res, returnJson }) => (
   fetch( /* Some API URL */ )
-    .then(result => result.json(),
-          reason => {
-            res.statusCode = 500;
-            return Promise.resolve(reason);
-          })
-    .then(returnJson);
-};
+    .then(res => res.json())
+);
 ```
 
 

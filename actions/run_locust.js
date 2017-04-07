@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 const querystring = require("querystring");
 
-module.exports = ({ parsedUrl, req, res, returnJson }) => (
+module.exports = ({ parsedUrl }) => (
   fetch("http://locust-master:8089/swarm", {
     method: "POST",
     body: querystring.stringify({
@@ -12,5 +12,4 @@ module.exports = ({ parsedUrl, req, res, returnJson }) => (
     headers: { "Content-Type": "application/x-www-form-urlencoded" }
   })
   .then(result => result.json())
-  .then(returnJson)
 );

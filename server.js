@@ -24,11 +24,18 @@ app.prepare()
         res.setHeader("Content-Type", "application/json");
 
         const returnJson = (json) => res.end(JSON.stringify(json));
-        handler({ parsedUrl, req, res, returnJson })
-          .catch(reason => {
-            res.statusCode = 500;
-            returnJson(reason);
-          });
+        const handle = handler({ parsedUrl, req, res, returnJson });
+        if (handle instanceof Promise) {
+          handle
+            .catch(reason => {
+              res.statusCode = 500;
+              return Promise.resolve(reason);
+            })
+            .then(response => {
+              if (!res.finished)
+                returnJson(response);
+            });
+        }
 
       } catch (e) {
 
