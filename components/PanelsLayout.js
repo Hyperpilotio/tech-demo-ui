@@ -1,6 +1,10 @@
 let Panel = ({dashboard = "hyperpilot-demo", panelId}) => (
-  <div className="column is-6">
-    <iframe src={`/grafana/dashboard-solo/db/${dashboard}?panelId=${panelId}`} />
+  <div>
+
+    <iframe src={process.env.NODE_ENV === "production" ?
+                 `/grafana/dashboard-solo/db/${dashboard}?panelId=${panelId}` :
+                 `http://play.grafana.org/dashboard-solo/db/internal-grafana-stats?panelId=${panelId}`} />
+
   </div>
 );
 
@@ -9,18 +13,44 @@ export default ({children}) => (
     <section className="hero is-primary is-bold is-fullheight">
       <div className="hero-body">
         <div className="container demo-container">
-          <div className="columns">
-            <div className="column is-4">
-              {children}
-            </div>
-            <div className="column is-8">
-              <div className="columns">
-                <Panel panelId="1" />
-                <Panel panelId="2" />
+          <div className="tile is-ancestor">
+            <div className="tile is-4 is-parent">
+              <div className="tile is-child">
+                {children}
               </div>
-              <div className="columns">
-                <Panel panelId="3" />
-                <Panel panelId="4" />
+            </div>
+            <div className="tile">
+              <div className="tile is-parent">
+                <div className="tile is-child box is-blurry is-info has-text-centered">
+                  <h4 className="subtitle is-4">High Priority Web Application</h4>
+                  <div>
+                    <span className="tag is-dark">Throughput</span>
+                    <span className="tag is-info">Application QoS</span>
+                  </div>
+                  <Panel panelId="3" />
+                  <div>
+                    <span className="tag is-dark">Latency</span>
+                    <span className="tag is-info">Application QoS</span>
+                  </div>
+                  <Panel panelId="1" />
+                </div>
+              </div>
+              <div className="tile is-vertical is-parent">
+                <div className="tile is-child box is-vertical is-blurry is-info has-text-centered">
+                  <h4 className="subtitle is-4">Low Priority Spark Jobs</h4>
+                  <div>
+                    <span className="tag is-dark">Throughput</span>
+                    <span className="tag is-info">Application QoS</span>
+                  </div>
+                  <Panel panelId="4" />
+                </div>
+                <div className="tile is-child box is-vertical is-blurry is-dark has-text-centered">
+                  <h4 className="subtitle is-4">Cluster Resources</h4>
+                  <div>
+                    <span className="tag is-info">Resource Utilization</span>
+                  </div>
+                  <Panel panelId="2" />
+                </div>
               </div>
             </div>
           </div>

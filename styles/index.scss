@@ -1,5 +1,10 @@
+$red: hsl(354, 100%, 61%);
+$green: hsl(130, 71%,  48%);
+
+
 @import "bulma/bulma.sass";
 @import "animate.css";
+
 
 @keyframes fadeOut {
   from {
@@ -22,9 +27,52 @@
 
   & iframe {
     width: 100%;
-    height: 250px;
-    @if $env != "production" {
-      background: url(http://placekitten.com/g/400/300);
+    height: 200px;
+  }
+
+}
+
+.tile {
+  &.is-parent {
+    padding: 0.5rem;
+  }
+  &.is-vertical > &.is-child:not(:last-child) {
+    margin-bottom: 0.5rem !important;
+  }
+
+  &.box {
+    padding: 0.75rem;
+    & .subtitle {
+      margin-bottom: 0.75rem;
+    }
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    /* justify-content: space-around; */
+    justify-content: center;
+    & .tag {
+      margin: 0.4rem 0.2rem;
+    }
+  }
+
+}
+
+.box {
+  @each $name, $pair in $colors {
+    $color: nth($pair, 1);
+    $color-invert: nth($pair, 2);
+    &.is-#{$name} {
+      background-color: $color;
+      color: $color-invert;
+
+      &.is-inverted {
+        background-color: $color-invert;
+        color: $color;
+      }
+      &.is-blurry {
+        background-color: rgba($color, 0.3);
+        color: $color;
+      }
     }
   }
 }
