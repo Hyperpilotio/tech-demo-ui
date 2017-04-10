@@ -48,8 +48,7 @@ $green: hsl(130, 71%,  48%);
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    /* justify-content: space-around; */
-    justify-content: center;
+    justify-content: space-around;
     & .tag {
       margin: 0.4rem 0.2rem;
     }
