@@ -24,7 +24,7 @@ export default class App extends React.Component {
     }
     const Stage = mod.default;
     const Layout = Stage.Layout || PanelsLayout;
-    const beforeMovingOn = mod.beforeMovingOn || (() => Promise.resolve());
+    const beforeMovingOn = mod.beforeMovingOn || (() => Promise.resolve({ ok: true }));
 
     // Ignore action errors when developing locally, easier to see content changes
     const ignoreActionError = process.env.NODE_ENV !== "production";
@@ -39,11 +39,16 @@ export default class App extends React.Component {
         <Layout>
           <Stage moveToNextStage={() => {
             beforeMovingOn()
-              .catch(error => {
-                if (!ignoreActionError)
-                  throw error;
-                else
-                  console.error(error);
+              .then(res => Promise.all( [res, res.text && res.text()] ))
+              .then(([res, text]) => {
+                if (!res.ok) {
+                  let errMsg = `Request Failed (${res.status}): ${text}`;
+                  if (!ignoreActionError)
+                    throw new Error(errMsg);
+                  else
+                    console.error(errMsg);
+                }
+                return Promise.resolve();
               })
               .then(() => {
                 Router.push({
