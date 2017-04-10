@@ -30,7 +30,7 @@
                 },
                 "containers": [
                     {
-                        "image": "hyperpilot\/spark-load-controller",
+                        "image": "hyperpilot\/spark-load-controller:large",
                         "name": "sparkload-controller",
                         "imagePullPolicy": "Always"
                     }
