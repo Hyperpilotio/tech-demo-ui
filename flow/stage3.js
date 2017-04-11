@@ -1,4 +1,5 @@
 import ContinueButton from "../components/ContinueButton";
+import fetch from "isomorphic-fetch";
 
 
 export default ({moveToNextStage}) => (
@@ -16,3 +17,6 @@ export default ({moveToNextStage}) => (
     <ContinueButton onClick={moveToNextStage}>Enable Hyperpilot Controller</ContinueButton>
   </div>
 )
+
+
+export const beforeMovingOn = () => fetch("/actions/run_qos_data_store");
