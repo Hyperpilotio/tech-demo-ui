@@ -12,6 +12,7 @@ const GoDDDRequestsCount = () => (
     <div>
       <span className="tag is-dark is-pulled-left">Throughput</span>
       <span className="tag is-info is-pulled-left">Application QoS</span>
+      <span className="tag is-success is-outlined is-pulled-right">Healthy</span>
     </div>
     <Panel panelId="3" />
   </div>
@@ -22,6 +23,7 @@ const GoDDDLatency = () => (
     <div>
       <span className="tag is-dark is-pulled-left">Latency</span>
       <span className="tag is-info is-pulled-left">Application QoS</span>
+      <span className="tag is-success is-outlined is-pulled-right">Healthy</span>
     </div>
     <Panel panelId="1" />
   </div>
@@ -32,6 +34,7 @@ const SparkJobsFinished = () => (
     <div>
       <span className="tag is-dark is-pulled-left">Throughput</span>
       <span className="tag is-info is-pulled-left">Application QoS</span>
+      <span className="tag is-danger is-outlined is-pulled-right">Attention</span>
     </div>
     <Panel panelId="4" />
   </div>
@@ -41,6 +44,7 @@ const CpuUtilization = () => (
   <div>
     <div>
       <span className="tag is-info is-pulled-left">Resource Utilization</span>
+      <span className="tag is-success is-outlined is-pulled-right">Healthy</span>
     </div>
     <Panel panelId="2" />
   </div>

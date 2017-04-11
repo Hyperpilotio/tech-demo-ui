@@ -1,7 +1,3 @@
-$red: hsl(354, 100%, 61%);
-$green: hsl(130, 71%,  48%);
-
-
 @import "bulma/bulma.sass";
 @import "animate.css";
 
@@ -74,4 +70,8 @@ $green: hsl(130, 71%,  48%);
       }
     }
   }
+}
+
+.tag.is-outlined {
+  border: 1px solid $white;
 }
