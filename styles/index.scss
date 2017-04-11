@@ -1,5 +1,7 @@
 @import "bulma/bulma.sass";
 @import "animate.css";
+$fa-font-path: "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts";
+@import "font-awesome/scss/font-awesome";
 
 
 @keyframes fadeOut {
