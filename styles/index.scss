@@ -93,3 +93,13 @@ $fa-font-path: "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts";
     }
   }
 }
+
+.button.is-circle {
+  border-radius: 100%;
+  width: 2rem;
+  height: 2rem;
+}
+
+.info-and-button {
+  align-items: center;
+}

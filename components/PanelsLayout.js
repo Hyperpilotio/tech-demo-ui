@@ -62,7 +62,7 @@ export default ({children}) => (
                 {children}
               </div>
             </div>
-            <div className="tile is-vertical is-ancestor">
+            <div className="tile is-vertical">
               <div className="tile is-parent">
                 <div className="tile is-child box is-success has-text-centered">
                   <h4 className="subtitle is-4">High Priority Web Application</h4>
