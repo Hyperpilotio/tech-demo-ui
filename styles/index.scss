@@ -100,6 +100,6 @@ $fa-font-path: "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts";
   height: 2rem;
 }
 
-.info-and-button {
-  align-items: center;
+.info-and-button > * {
+  padding: 1rem;
 }

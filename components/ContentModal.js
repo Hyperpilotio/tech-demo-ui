@@ -5,7 +5,7 @@ export default class ContentModal extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { isActive: "" };
+    this.state = { isActive: "is-active" };
   }
 
   showModal() {
@@ -19,16 +19,20 @@ export default class ContentModal extends React.Component {
   render() {
     return (
       <div>
-        <a className="button is-small is-inverted is-outlined is-primary is-circle" onClick={::this.showModal}>
-          <i className="fa fa-info"></i>
+        <a className="button is-small is-inverted is-outlined is-primary" onClick={::this.showModal}>
+          Show Description
         </a>
         <div ref="modalElem" className={`modal ${this.state.isActive}`}>
           <div className="modal-background" onClick={::this.hideModal} />
-          <h2 className="subtitle">
-            <content className="modal-content">
-              {this.props.children}
-            </content>
-          </h2>
+          <div className="modal-content">
+            <div className="card">
+              <div className="card-content">
+                <content className="content has-text-left">
+                  {this.props.children}
+                </content>
+              </div>
+            </div>
+          </div>
           <div className="modal-close" onClick={::this.hideModal} />
         </div>
       </div>
