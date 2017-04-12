@@ -7,8 +7,8 @@ const Panel = ({dashboard = "hyperpilot-demo", panelId}) => (
 );
 
 
-const GoDDDRequestsCount = () => (
-  <div>
+const GoDDDRequestsCount = (props) => (
+  <div {...props}>
     <div>
       <span className="tag is-dark is-pulled-left">Throughput</span>
       <span className="tag is-info is-pulled-left">Application QoS</span>
@@ -18,8 +18,8 @@ const GoDDDRequestsCount = () => (
   </div>
 );
 
-const GoDDDLatency = () => (
-  <div>
+const GoDDDLatency = (props) => (
+  <div {...props}>
     <div>
       <span className="tag is-dark is-pulled-left">Latency</span>
       <span className="tag is-info is-pulled-left">Application QoS</span>
@@ -29,8 +29,8 @@ const GoDDDLatency = () => (
   </div>
 );
 
-const SparkJobsFinished = () => (
-  <div>
+const SparkJobsFinished = (props) => (
+  <div {...props}>
     <div>
       <span className="tag is-dark is-pulled-left">Throughput</span>
       <span className="tag is-info is-pulled-left">Application QoS</span>
@@ -40,8 +40,8 @@ const SparkJobsFinished = () => (
   </div>
 );
 
-const CpuUtilization = () => (
-  <div>
+const CpuUtilization = (props) => (
+  <div {...props}>
     <div>
       <span className="tag is-info is-pulled-left">Resource Utilization</span>
       <span className="tag is-warning is-outlined is-pulled-right"><i className="fa fa-exclamation"></i></span>
@@ -62,22 +62,28 @@ export default ({children}) => (
                 {children}
               </div>
             </div>
-            <div className="tile">
+            <div className="tile is-vertical is-ancestor">
               <div className="tile is-parent">
                 <div className="tile is-child box is-success has-text-centered">
                   <h4 className="subtitle is-4">High Priority Web Application</h4>
-                  <GoDDDRequestsCount />
-                  <GoDDDLatency />
+                  <div className="columns">
+                    <GoDDDRequestsCount className="column" />
+                    <GoDDDLatency className="column" />
+                  </div>
                 </div>
               </div>
-              <div className="tile is-vertical is-parent">
-                <div className="tile is-child box is-vertical is-danger has-text-centered">
-                  <h4 className="subtitle is-4">Low Priority Spark Jobs</h4>
-                  <SparkJobsFinished />
+              <div className="tile is-parent">
+                <div className="tile is-child">
+                  <div className="box is-danger has-text-centered">
+                    <h4 className="subtitle is-4">Low Priority Spark Jobs</h4>
+                    <SparkJobsFinished />
+                  </div>
                 </div>
-                <div className="tile is-child box is-vertical is-blurry is-dark has-text-centered">
-                  <h4 className="subtitle is-4">Cluster Resources</h4>
-                  <CpuUtilization />
+                <div className="tile is-child">
+                  <div className="box is-blurry is-dark has-text-centered">
+                    <h4 className="subtitle is-4">Cluster Resources</h4>
+                    <CpuUtilization />
+                  </div>
                 </div>
               </div>
             </div>
