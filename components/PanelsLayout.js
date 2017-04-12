@@ -70,7 +70,7 @@ export default ({children}) => (
           <div className="tile is-ancestor is-vertical">
             <div className="tile">
               <div className="tile is-4 is-parent">
-                <div className="tile is-child">
+                <div className="tile is-child hero-body">
                   {children}
                 </div>
               </div>
