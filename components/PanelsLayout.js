@@ -50,19 +50,30 @@ const CpuUtilization = (props) => (
   </div>
 );
 
+// XXX: Just for mockup here
+const Networking = (props) => (
+  <div {...props}>
+    <div>
+      <span className="tag is-info is-pulled-left">Resource Utilization</span>
+      <span className="tag is-success is-outlined is-pulled-right"><i className="fa fa-check"></i></span>
+    </div>
+    <Panel panelId="5" />
+  </div>
+);
+
 
 export default ({children}) => (
   <div>
     <section className="hero is-primary is-bold is-fullheight">
       <div className="hero-body">
         <div className="container demo-container">
-          <div className="tile is-ancestor">
-            <div className="tile is-4 is-parent">
-              <div className="tile is-child">
-                {children}
+          <div className="tile is-ancestor is-vertical">
+            <div className="tile">
+              <div className="tile is-4 is-parent">
+                <div className="tile is-child">
+                  {children}
+                </div>
               </div>
-            </div>
-            <div className="tile is-vertical">
               <div className="tile is-parent">
                 <div className="tile is-child box is-success has-text-centered">
                   <h4 className="subtitle is-4">High Priority Web Application</h4>
@@ -72,18 +83,21 @@ export default ({children}) => (
                   </div>
                 </div>
               </div>
-              <div className="tile is-parent">
-                <div className="tile is-child">
-                  <div className="box is-danger has-text-centered">
-                    <h4 className="subtitle is-4">Low Priority Spark Jobs</h4>
-                    <SparkJobsFinished />
+            </div>
+            <div className="tile is-parent">
+              <div className="tile is-child is-8">
+                <div className="box is-blurry is-dark has-text-centered">
+                  <h4 className="subtitle is-4">Cluster Resources</h4>
+                  <div className="columns">
+                    <CpuUtilization className="column" />
+                    <Networking className="column" />
                   </div>
                 </div>
-                <div className="tile is-child">
-                  <div className="box is-blurry is-dark has-text-centered">
-                    <h4 className="subtitle is-4">Cluster Resources</h4>
-                    <CpuUtilization />
-                  </div>
+              </div>
+              <div className="tile is-child">
+                <div className="box is-danger has-text-centered">
+                  <h4 className="subtitle is-4">Low Priority Spark Jobs</h4>
+                  <SparkJobsFinished />
                 </div>
               </div>
             </div>
