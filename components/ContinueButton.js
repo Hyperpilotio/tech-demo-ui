@@ -6,29 +6,39 @@ export default class ContinueButton extends React.Component {
   constructor(props) {
     super(props);
     this.btnClass = props.btnClass || "is-primary";
-    this.state = { isLoading: false };
+    this.state = { isLoading: "", text: props.text, actionDone: false };
   }
 
   render() {
     return (
-      <a className={`button ${this.btnClass} is-inverted is-medium is-outlined
-        ${this.state.isLoading ? "is-loading" : ""}`}
+      <a className={`button ${this.btnClass} is-inverted is-medium is-outlined ${this.state.isLoading}`}
         onClick={async () => {
-          this.toggleLoading();
-          try {
-            await this.props.onClick();
-          } catch (e) {
-            console.error(e);
+
+          if (!this.state.actionDone && this.props.doRun !== undefined) {
             this.toggleLoading();
+            let success = await this.props.doRun();
+            this.toggleLoading();
+            if (success) {
+              if (this.props.directlyNextPage) {
+                this.props.nextPage();
+              } else {
+                this.setState({ text: "Next Page", actionDone: true });
+              }
+            } else {
+              this.setState({ text: "Failed: Try Again" });
+            }
+
+          } else {
+            this.props.nextPage();
           }
         }} >
-        {this.props.children}
+        {this.state.text}
       </a>
     );
   }
 
   toggleLoading() {
-    this.setState({ isLoading: !this.state.isLoading});
+    this.setState({ isLoading: this.state.isLoading === "" ? "is-loading": "" });
   }
 
 }

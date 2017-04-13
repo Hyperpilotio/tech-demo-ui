@@ -8,7 +8,7 @@
 ### Component
 - With default namespace, export a React component.
 - The exported component uses `components/PanelsComponent` as default layout. To specify another layout component, set the component's `Layout` property as that layout component. e.g. `stage0.js`.
-- The component receives a `moveToNextStage` prop, which should directly go to `onClick` prop of `ContinueButton`. It will invoke `beforeMovingOn` and move to the next stage after that.
+- The component receives `doRun` and `nextPage` props, which should directly propagate to `ContinueButton`. It will invoke `beforeMovingOn` and change the button to show "Next Page", and then move to the next stage after clicking that.
 
 ### `beforeMovingOn`
 - With `beforeMovingOn` namespace, export a function that does what the button says for the given stage.
@@ -20,13 +20,13 @@
 import { ContinueButton } from "../components";
 import fetch from "isomorphic-fetch";
 
-export default ({moveToNextStage}) => (
+export default (props) => (
   <div className="animated fadeIn">
     <h1 className="title is-spaced"> TITLE GOES HERE </h1>
     <div className="stage-content">
       CONTNET GOES HERE
-      <ContinueButton onClick={moveToNextStage}> BUTTON TEXT </ContinueButton>
     </div>
+    <ContinueButton text=" BUTTON TEXT " {...props} />
   </div>
 )
 

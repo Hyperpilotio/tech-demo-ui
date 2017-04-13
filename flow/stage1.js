@@ -2,7 +2,7 @@ import { ContinueButton } from "../components";
 import fetch from "isomorphic-fetch";
 
 
-export default ({moveToNextStage}) => (
+export default (props) => (
   <div className="animated fadeIn">
     <h1 className="title is-spaced">Start high priority Web App</h1>
     <div className="stage-content">
@@ -12,7 +12,7 @@ export default ({moveToNextStage}) => (
         <li>Application QoS more assured, but Resource Efficiency suffers</li>
       </ul>
     </div>
-    <ContinueButton onClick={moveToNextStage}>Run</ContinueButton>
+    <ContinueButton text="Run" {...props} />
   </div>
 )
 

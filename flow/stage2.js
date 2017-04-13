@@ -2,7 +2,7 @@ import { ContinueButton } from "../components";
 import fetch from "isomorphic-fetch";
 
 
-export default ({moveToNextStage}) => (
+export default (props) => (
   <div className="animated fadeIn">
     <h1 className="title is-spaced">Add lower priority Spark jobs</h1>
     <div className="stage-content">
@@ -12,7 +12,7 @@ export default ({moveToNextStage}) => (
         <li>Performance degradation violates SLO of Web App</li>
       </ul>
     </div>
-    <ContinueButton onClick={moveToNextStage}>Run</ContinueButton>
+    <ContinueButton text="Run" {...props} />
   </div>
 )
 

@@ -37,23 +37,36 @@ export default class App extends React.Component {
         </Head>
 
         <Layout>
-          <Stage moveToNextStage={async () => {
-            let res = await beforeMovingOn();
-            let text = "";
-            if (res.text !== undefined)
-              text = await res.text();
-            if (!res.ok) {
-              let errMsg = `Request Failed (${res.status}): ${text}`;
-              if (!ignoreActionError)
-                throw new Error(errMsg);
-              else
-                console.error(errMsg);
-            }
-            Router.push({
-              pathname: "/",
-              query: { stage: this.props.demoStage + 1 }
-            });
-          } } />
+          <Stage
+            doRun={async () => {
+
+              try {
+                var res = await beforeMovingOn();
+              } catch (e) {
+                console.error(e);
+                return false;
+              }
+
+              let text = "";
+              if (res.text !== undefined)
+                text = await res.text();
+
+              if (!res.ok) {
+                console.error(`Request Failed (${res.status}): ${text}`);
+                if (!ignoreActionError)
+                  return false;
+              }
+
+              return true;
+            }}
+
+            nextPage={() => {
+              Router.push({
+                pathname: "/",
+                query: { stage: this.props.demoStage + 1 }
+              });
+            }} />
+
         </Layout>
       </div>
     );
