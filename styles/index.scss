@@ -46,6 +46,10 @@ $fa-font-path: "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts";
     padding: 0.25rem;
   }
 
+  &.is-vertical .box:not(:last-child) {
+    margin-bottom: 0;
+  }
+
   .box {
     padding: 0.75rem;
     display: flex;
@@ -60,8 +64,21 @@ $fa-font-path: "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts";
     .tag {
       margin: 0.4rem 0.2rem;
     }
+
   }
 
+}
+
+.box.chart-group {
+  .columns {
+    margin-top: 0;
+  }
+  .subtitle {
+    margin-bottom: 0.5rem;
+  }
+  .box {
+    padding: 0.5rem;
+  }
 }
 
 .box {
@@ -78,6 +95,10 @@ $fa-font-path: "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts";
       }
       &.is-blurry {
         background-color: rgba($color, 0.3);
+        color: $color;
+      }
+      &.is-inactive {
+        background-color: rgba($color, 0.8);
         color: $color;
       }
     }

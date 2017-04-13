@@ -82,16 +82,16 @@ export default ({children}) => (
             </div>
             <div className="tile is-parent">
               <div className="tile is-child is-8">
-                <div className="box is-blurry is-dark has-text-centered">
+                <div className="chart-group box is-blurry is-dark has-text-centered">
                   <h4 className="subtitle is-4">Cluster Resources</h4>
                   <div className="columns">
-                    <CpuUtilization className="column" />
-                    <Networking className="column" />
+                    <CpuUtilization className="box is-warning column" />
+                    <Networking className="box is-warning column" />
                   </div>
                 </div>
               </div>
               <div className="tile is-child">
-                <div className="box is-danger has-text-centered">
+                <div className="box is-dark is-inactive has-text-centered">
                   <h4 className="subtitle is-4">Low Priority Spark Jobs</h4>
                   <SparkJobsFinished />
                 </div>
