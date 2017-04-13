@@ -1,4 +1,4 @@
-import { ContinueButton, ContentModal } from "../components";
+import { ContinueButton } from "../components";
 import fetch from "isomorphic-fetch";
 
 

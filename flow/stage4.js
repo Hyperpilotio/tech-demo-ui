@@ -1,5 +1,3 @@
-import ContentModal from "../components/ContentModal";
-
 export default ({moveToNextStage}) => (
   <div className="animated fadeIn">
     <h1 className="title is-spaced">Hyperpilot Controller In Action</h1>
