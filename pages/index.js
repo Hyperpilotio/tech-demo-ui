@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Router from "next/router";
-import PanelsLayout from '../components/PanelsLayout';
+import { PanelsLayout } from '../components';
 import stylesheet from 'styles/index.scss';
 
 
