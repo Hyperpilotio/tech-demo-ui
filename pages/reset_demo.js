@@ -46,7 +46,7 @@ export default class ResetDemo extends React.Component {
                     </div>
                   </div>
                   )) :
-                <ContinueButton btnClass="is-danger" onClick={::this.resetDemo}>Reset Demo</ContinueButton>
+                <ContinueButton btnClass="is-danger" text="Reset Demo" doRun={::this.resetDemo} />
               }
             </div>
           </div>
