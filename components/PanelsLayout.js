@@ -33,7 +33,7 @@ const GoDDDLatency = (props) => (
 const SparkJobsFinished = (props) => (
   <div {...props}>
     <div>
-      <Badge className="is-dark">Latency</Badge>
+      <Badge className="is-dark">Throughut</Badge>
       <Badge className="is-info">Application QoS</Badge>
       <HealthBadge status="danger" />
     </div>
