@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React from "react";
-import ContinueButton from "../components/ContinueButton";
 import fetch from "isomorphic-fetch";
+import { ContinueButton } from "../components";
 import bulma from "bulma/bulma.sass";
 
 
