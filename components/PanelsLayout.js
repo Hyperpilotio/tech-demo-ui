@@ -1,4 +1,5 @@
-import { Badge, HealthBadge } from "./Badge";
+import { Badge } from "./Badge";
+import StatusIndicator from "./StatusIndicator";
 
 const Panel = ({dashboard = "hyperpilot-demo", panelId}) => (
   <div>
@@ -71,12 +72,14 @@ export default ({children}) => (
                 </div>
               </div>
               <div className="tile is-parent">
-                <div className="tile is-child box is-success has-text-centered">
-                  <h4 className="subtitle is-4">High Priority Web Application</h4>
-                  <div className="columns">
-                    <GoDDDRequestsCount className="column" />
-                    <GoDDDLatency className="column" />
-                  </div>
+                <div className="tile is-child has-text-centered is-paddingless">
+                  <StatusIndicator status="good">
+                    <h4 className="subtitle is-4">High Priority Web Application</h4>
+                    <div className="columns">
+                      <GoDDDRequestsCount className="column" />
+                      <GoDDDLatency className="column" />
+                    </div>
+                  </StatusIndicator>
                 </div>
               </div>
             </div>
@@ -85,15 +88,25 @@ export default ({children}) => (
                 <div className="chart-group box is-blurry is-dark has-text-centered">
                   <h4 className="subtitle is-4">Cluster Resources</h4>
                   <div className="columns">
-                    <CpuUtilization className="box is-warning column" />
-                    <Networking className="box is-warning column" />
+                    <div className="column">
+                      <StatusIndicator status="warn">
+                        <CpuUtilization />
+                      </StatusIndicator>
+                    </div>
+                    <div className="column">
+                      <StatusIndicator status="warn">
+                        <Networking />
+                      </StatusIndicator>
+                    </div>
                   </div>
                 </div>
               </div>
               <div className="tile is-child">
-                <div className="box is-dark is-inactive has-text-centered">
-                  <h4 className="subtitle is-4">Low Priority Spark Jobs</h4>
-                  <SparkJobsFinished />
+                <div className="has-text-centered">
+                  <StatusIndicator status="inactive">
+                    <h4 className="subtitle is-4">Low Priority Spark Jobs</h4>
+                    <SparkJobsFinished />
+                  </StatusIndicator>
                 </div>
               </div>
             </div>

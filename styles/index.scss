@@ -72,6 +72,15 @@ $fa-font-path: "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts";
 .box.chart-group {
   .columns {
     margin-top: 0;
+    .column {
+      padding: 0;
+      &:not(:first-child) {
+        padding-left: 0.1rem;
+      }
+      &:not(:last-child) {
+        padding-right: 0.1rem;
+      }
+    }
   }
   .subtitle {
     margin-bottom: 0.5rem;
