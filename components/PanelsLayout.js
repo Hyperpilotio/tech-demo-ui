@@ -13,7 +13,6 @@ const GoDDDRequestsCount = (props) => (
     <div>
       <Badge className="is-dark">Throughput</Badge>
       <Badge className="is-info">Application QoS</Badge>
-      <HealthBadge status="success" />
     </div>
     <Panel panelId="3" />
   </div>
@@ -24,7 +23,6 @@ const GoDDDLatency = (props) => (
     <div>
       <Badge className="is-dark">Latency</Badge>
       <Badge className="is-info">Application QoS</Badge>
-      <HealthBadge status="success" />
     </div>
     <Panel panelId="1" />
   </div>
@@ -35,7 +33,6 @@ const SparkJobsFinished = (props) => (
     <div>
       <Badge className="is-dark">Throughut</Badge>
       <Badge className="is-info">Application QoS</Badge>
-      <HealthBadge status="danger" />
     </div>
     <Panel panelId="4" />
   </div>
@@ -45,7 +42,6 @@ const CpuUtilization = (props) => (
   <div {...props}>
     <div>
       <Badge className="is-info">Resource Utilization</Badge>
-      <HealthBadge status="warning" />
     </div>
     <Panel panelId="2" />
   </div>
@@ -56,7 +52,6 @@ const Networking = (props) => (
   <div {...props}>
     <div>
       <Badge className="is-info">Traffic Load</Badge>
-      <HealthBadge status="success" />
     </div>
     <Panel panelId="5" />
   </div>
