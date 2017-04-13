@@ -1,3 +1,5 @@
+import { Badge, HealthBadge } from "./Badge";
+
 const Panel = ({dashboard = "hyperpilot-demo", panelId}) => (
   <div>
     <iframe src={process.env.NODE_ENV === "production" ?
@@ -6,13 +8,12 @@ const Panel = ({dashboard = "hyperpilot-demo", panelId}) => (
   </div>
 );
 
-
 const GoDDDRequestsCount = (props) => (
   <div {...props}>
     <div>
-      <span className="tag is-dark is-pulled-left">Throughput</span>
-      <span className="tag is-info is-pulled-left">Application QoS</span>
-      <span className="tag is-success is-outlined is-pulled-right"><i className="fa fa-check"></i></span>
+      <Badge className="is-dark">Throughput</Badge>
+      <Badge className="is-info">Application QoS</Badge>
+      <HealthBadge status="success" />
     </div>
     <Panel panelId="3" />
   </div>
@@ -21,9 +22,9 @@ const GoDDDRequestsCount = (props) => (
 const GoDDDLatency = (props) => (
   <div {...props}>
     <div>
-      <span className="tag is-dark is-pulled-left">Latency</span>
-      <span className="tag is-info is-pulled-left">Application QoS</span>
-      <span className="tag is-success is-outlined is-pulled-right"><i className="fa fa-check"></i></span>
+      <Badge className="is-dark">Latency</Badge>
+      <Badge className="is-info">Application QoS</Badge>
+      <HealthBadge status="success" />
     </div>
     <Panel panelId="1" />
   </div>
@@ -32,9 +33,9 @@ const GoDDDLatency = (props) => (
 const SparkJobsFinished = (props) => (
   <div {...props}>
     <div>
-      <span className="tag is-dark is-pulled-left">Throughput</span>
-      <span className="tag is-info is-pulled-left">Application QoS</span>
-      <span className="tag is-danger is-outlined is-pulled-right"><i className="fa fa-exclamation"></i></span>
+      <Badge className="is-dark">Latency</Badge>
+      <Badge className="is-info">Application QoS</Badge>
+      <HealthBadge status="danger" />
     </div>
     <Panel panelId="4" />
   </div>
@@ -43,8 +44,8 @@ const SparkJobsFinished = (props) => (
 const CpuUtilization = (props) => (
   <div {...props}>
     <div>
-      <span className="tag is-info is-pulled-left">Resource Utilization</span>
-      <span className="tag is-warning is-outlined is-pulled-right"><i className="fa fa-exclamation"></i></span>
+      <Badge className="is-info">Resource Utilization</Badge>
+      <HealthBadge status="warning" />
     </div>
     <Panel panelId="2" />
   </div>
@@ -54,8 +55,8 @@ const CpuUtilization = (props) => (
 const Networking = (props) => (
   <div {...props}>
     <div>
-      <span className="tag is-info is-pulled-left">Resource Utilization</span>
-      <span className="tag is-success is-outlined is-pulled-right"><i className="fa fa-check"></i></span>
+      <Badge className="is-info">Resource Utilization</Badge>
+      <HealthBadge status="success" />
     </div>
     <Panel panelId="5" />
   </div>
