@@ -1,5 +1,7 @@
+import React from "react";
 import { Badge } from "./Badge";
 import StatusIndicator from "./StatusIndicator";
+import fetch from "isomorphic-fetch";
 
 const Panel = ({dashboard = "hyperpilot-demo", panelId}) => (
   <div>
@@ -59,51 +61,74 @@ const Networking = (props) => (
 );
 
 
-export default ({children}) => (
-  <div>
-    <section className="hero is-primary is-bold is-fullheight">
-      <div className="hero-body">
-        <div className="container demo-container">
-          <div className="tile is-ancestor is-vertical">
-            <div className="tile">
-              <div className="tile is-4 is-parent">
-                <div className="tile is-child hero-body">
-                  {children}
+export default class PanelsLayout extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      indicator: {
+        app: "inactive",
+        spark: "inactive",
+        cpu: "inactive",
+        network: "inactive"
+      }
+    };
+    this.updateStatusIndicators();
+  }
+
+  async updateStatusIndicators() {
+    const res = await fetch("/actions/get_status_indicators")
+    if (res.ok) {
+      const indicator = await res.json();
+      this.setState({ indicator });
+    }
+    setTimeout(::this.updateStatusIndicators, 5000);
+  }
+
+  render() {
+    return (
+      <section className="hero is-primary is-bold is-fullheight">
+        <div className="hero-body">
+          <div className="container demo-container">
+            <div className="tile is-ancestor is-vertical">
+              <div className="tile">
+                <div className="tile is-4 is-parent">
+                  <div className="tile is-child hero-body">
+                    {this.props.children}
+                  </div>
                 </div>
-              </div>
-              <div className="tile is-parent">
-                <div className="tile is-child has-text-centered is-paddingless">
-                  <StatusIndicator status="good">
-                    <h4 className="subtitle is-4">High Priority Web Application</h4>
-                    <div className="columns">
-                      <GoDDDRequestsCount className="column" />
-                      <GoDDDLatency className="column" />
-                    </div>
-                  </StatusIndicator>
-                </div>
-              </div>
-            </div>
-            <div className="tile is-parent">
-              <div className="tile is-child is-8">
-                <div className="chart-group box is-blurry is-dark has-text-centered">
-                  <h4 className="subtitle is-4">Cluster Resources</h4>
-                  <div className="columns">
-                    <div className="column">
-                      <StatusIndicator status="warn">
-                        <CpuUtilization />
-                      </StatusIndicator>
-                    </div>
-                    <div className="column">
-                      <StatusIndicator status="warn">
-                        <Networking />
-                      </StatusIndicator>
-                    </div>
+                <div className="tile is-parent">
+                  <div className="tile is-child has-text-centered is-paddingless">
+                    <StatusIndicator status={this.state.indicator.app}>
+                      <h4 className="subtitle is-4">High Priority Web Application</h4>
+                      <div className="columns">
+                        <GoDDDRequestsCount className="column" />
+                        <GoDDDLatency className="column" />
+                      </div>
+                    </StatusIndicator>
                   </div>
                 </div>
               </div>
-              <div className="tile is-child">
-                <div className="has-text-centered">
-                  <StatusIndicator status="inactive">
+              <div className="tile is-parent">
+                <div className="tile is-child is-8">
+                  <div className="chart-group box is-blurry is-dark has-text-centered">
+                    <h4 className="subtitle is-4">Cluster Resources</h4>
+                    <div className="columns">
+                      <div className="column">
+                        <StatusIndicator status={this.state.indicator.cpu}>
+                          <CpuUtilization />
+                        </StatusIndicator>
+                      </div>
+                      <div className="column">
+                        <StatusIndicator status={this.state.indicator.network}>
+                          <Networking />
+                        </StatusIndicator>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="tile is-child has-text-centered">
+                  <StatusIndicator status={this.state.indicator.spark}>
                     <h4 className="subtitle is-4">Low Priority Spark Jobs</h4>
                     <SparkJobsFinished />
                   </StatusIndicator>
@@ -112,7 +137,8 @@ export default ({children}) => (
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  </div>
-)
+      </section>
+    );
+  }
+
+}
