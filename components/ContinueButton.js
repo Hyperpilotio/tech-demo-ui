@@ -13,13 +13,22 @@ export default class ContinueButton extends React.Component {
     return (
       <a className={`button ${this.btnClass} is-inverted is-medium is-outlined
         ${this.state.isLoading ? "is-loading" : ""}`}
-          onClick={() => {this.setIsLoading(); this.props.onClick();}} >
+        onClick={async () => {
+          this.toggleLoading();
+          try {
+            await this.props.onClick();
+          } catch (e) {
+            console.error(e);
+            this.toggleLoading();
+          }
+        }} >
         {this.props.children}
       </a>
     );
   }
 
-  setIsLoading() {
-    this.setState({ isLoading: true });
+  toggleLoading() {
+    this.setState({ isLoading: !this.state.isLoading});
   }
+
 }
