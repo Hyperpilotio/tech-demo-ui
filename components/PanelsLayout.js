@@ -55,7 +55,7 @@ const CpuUtilization = (props) => (
 const Networking = (props) => (
   <div {...props}>
     <div>
-      <Badge className="is-info">Resource Utilization</Badge>
+      <Badge className="is-info">Traffic Load</Badge>
       <HealthBadge status="success" />
     </div>
     <Panel panelId="5" />
