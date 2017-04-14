@@ -13,7 +13,7 @@ export default (props) => (
         <li>Restores Web App QoS</li>
       </ul>
     </div>
-    <ContinueButton text="Run" {...props} />
+    <ContinueButton text="Run" {...props} noNextPage />
   </div>
 )
 
