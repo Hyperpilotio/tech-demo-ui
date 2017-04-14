@@ -11,8 +11,8 @@ export default ({ status, children }) => {
     case "bad":
       cssClass = "is-danger";
       break;
-    case "inactive":
-      cssClass = "is-dark is-inactive";
+    case "none":
+      cssClass = "is-grey-dark";
       break;
   }
 

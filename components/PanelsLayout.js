@@ -34,7 +34,7 @@ const GoDDDLatency = (props) => (
 const SparkJobsFinished = (props) => (
   <div {...props}>
     <div>
-      <Badge className="is-dark">Throughut</Badge>
+      <Badge className="is-dark">Throughput</Badge>
       <Badge className="is-info">Application QoS</Badge>
     </div>
     <Panel panelId="4" />
@@ -67,10 +67,10 @@ export default class PanelsLayout extends React.Component {
     super(props);
     this.state = {
       indicator: {
-        app: "inactive",
-        spark: "inactive",
-        cpu: "inactive",
-        network: "inactive"
+        app: "none",
+        spark: "none",
+        cpu: "none",
+        network: "none"
       }
     };
     this.updateStatusIndicators();
@@ -102,8 +102,8 @@ export default class PanelsLayout extends React.Component {
                     <StatusIndicator status={this.state.indicator.app}>
                       <h4 className="subtitle is-4">High Priority Web Application</h4>
                       <div className="columns">
-                        <GoDDDRequestsCount className="column" />
                         <GoDDDLatency className="column" />
+                        <GoDDDRequestsCount className="column" />
                       </div>
                     </StatusIndicator>
                   </div>
