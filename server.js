@@ -29,7 +29,7 @@ app.prepare()
           handle
             .catch(reason => {
               res.statusCode = 500;
-              return Promise.resolve(reason);
+              return reason;
             })
             .then(returnJson);
         }
