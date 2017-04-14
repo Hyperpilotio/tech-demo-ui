@@ -1,22 +1,23 @@
 const { parse } = require("url");
 const { exec } = require("child-process-promise");
 const fetch = require("isomorphic-fetch");
-const Influx = require("influx");
-const influx = new Influx.InfluxDB({
-  host: "influxsrv",
-  database: "snap"
-});
+// const Influx = require("influx");
+// const influx = new Influx.InfluxDB({
+//   host: "influxsrv",
+//   database: "snap"
+// });
 
 const scriptedStatus = () => Promise.all([
 
   exec("kubectl get deployments -n hyperpilot -o json")
     .then(out => JSON.parse(out.stdout))
-    .then(data => data.items.reduce(
-      ((res, item) => (res[item.metadata.name] = true) && res), {}
-    ))
+    .then(data => data.items.reduce((res, item) => {
+      res[item.metadata.name] = (item.status.availableReplicas === item.status.replicas);
+      return res;
+    }, {}))
     .then(deploys => ({
-      loadController: deploys["load-controller"] === true,
-      sparkLoadController: deploys["spark-load-controller"] === true,
+      loadController: deploys["load-controller"],
+      sparkLoadController: deploys["spark-load-controller"]
     })),
 
   fetch("http://qos-data-store:7781/v1/switch")
