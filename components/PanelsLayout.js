@@ -82,7 +82,7 @@ export default class PanelsLayout extends React.Component {
       const indicator = await res.json();
       this.setState({ indicator });
     }
-    setTimeout(::this.updateStatusIndicators, 5000);
+    setTimeout(::this.updateStatusIndicators, 3000);
   }
 
   render() {
