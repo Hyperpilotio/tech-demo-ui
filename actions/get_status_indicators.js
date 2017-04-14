@@ -11,7 +11,9 @@ const scriptedStatus = () => Promise.all([
 
   exec("kubectl get deployments -n hyperpilot -o json")
     .then(out => JSON.parse(out.stdout))
-    .then(data => data.items.reduce((res, item) => (res[item.metadata.name] = true), {}))
+    .then(data => data.items.reduce(
+      ((res, item) => (res[item.metadata.name] = true) && res), {}
+    ))
     .then(deploys => ({
       loadController: deploys["load-controller"] === true,
       sparkLoadController: deploys["spark-load-controller"] === true,
