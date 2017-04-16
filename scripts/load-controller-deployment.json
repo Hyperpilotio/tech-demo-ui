@@ -36,7 +36,7 @@
                             "--master-host",
                             "locust-master",
                             "--load-file",
-                            "https:\/\/hyperpilot-snap-collectors.s3.amazonaws.com\/hi_lo_config.json"
+                            "https:\/\/hyperpilot-snap-collectors.s3.amazonaws.com\/hi_lo_config_high.json"
                         ],
                         "resources": {
                             "limits": {

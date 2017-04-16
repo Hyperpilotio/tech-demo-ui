@@ -110,7 +110,7 @@ export default class PanelsLayout extends React.Component {
                 </div>
               </div>
               <div className="tile is-parent">
-                <div className="tile is-child is-8">
+                <div className="tile is-child is-4">
                   <div className="chart-group box is-blurry is-dark has-text-centered">
                     <h4 className="subtitle is-4">Cluster Resources</h4>
                     <div className="columns">
@@ -118,16 +118,11 @@ export default class PanelsLayout extends React.Component {
                         <StatusIndicator status={this.state.indicator.cpu}>
                           <CpuUtilization />
                         </StatusIndicator>
-                      </div>
-                      <div className="column">
-                        <StatusIndicator status={this.state.indicator.network}>
-                          <Networking />
-                        </StatusIndicator>
-                      </div>
+                     </div>
                     </div>
                   </div>
                 </div>
-                <div className="tile is-child has-text-centered">
+                <div className="tile is-child has-text-centered is-4">
                   <StatusIndicator status={this.state.indicator.spark}>
                     <h4 className="subtitle is-4">Low Priority Spark Jobs</h4>
                     <SparkJobsFinished />

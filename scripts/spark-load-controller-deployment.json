@@ -30,7 +30,7 @@
                 },
                 "containers": [
                     {
-                        "image": "hyperpilot\/spark-load-controller:large",
+                        "image": "hyperpilot\/spark-load-controller:terasort_1g_jobs",
                         "name": "sparkload-controller",
                         "imagePullPolicy": "Always"
                     }
