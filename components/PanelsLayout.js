@@ -110,6 +110,7 @@ export default class PanelsLayout extends React.Component {
                 </div>
               </div>
               <div className="tile is-parent">
+                <div className="tile is-child is-4" />
                 <div className="tile is-child is-4">
                   <div className="chart-group box is-blurry is-dark has-text-centered">
                     <h4 className="subtitle is-4">Cluster Resources</h4>
