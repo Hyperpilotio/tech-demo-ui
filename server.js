@@ -1,10 +1,14 @@
 const { createServer } = require('http');
 const { parse } = require('url');
+const child_process = require("child_process");
 const next = require('next');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
+
+// Check if kubectl is working, aborts if not
+child_process.execSync("kubectl cluster-info");
 
 app.prepare()
 .then(() => {
