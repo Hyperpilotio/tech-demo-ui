@@ -8,8 +8,6 @@ import stylesheet from 'styles/index.scss';
 export default class App extends React.Component {
 
   static async getInitialProps({ req, query }) {
-    if (req !== undefined)
-      query.stage = 0;
     return { demoStage: parseInt(query.stage || "0") };
   }
 
