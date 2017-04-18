@@ -7,8 +7,10 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-// Check if kubectl is working, aborts if not
-child_process.execSync("kubectl cluster-info");
+if (!dev) {
+  // Check if kubectl is working, aborts if not
+  child_process.execSync("kubectl cluster-info");
+}
 
 app.prepare()
 .then(() => {
@@ -33,6 +35,8 @@ app.prepare()
           handle
             .catch(reason => {
               res.statusCode = 500;
+              console.error(`ERROR when ${req.method} ${pathname}`);
+              console.error(`${reason.name}:\n    ${reason.message}`);
               return reason;
             })
             .then(returnJson);
