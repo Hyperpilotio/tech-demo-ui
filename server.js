@@ -35,11 +35,6 @@ setupDeployments
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
 
-    if (dev && pathname.startsWith("/grafana/")) {
-      res.end("Will be replaced by a Grafana panel");
-      return;
-    }
-
     if (pathname.startsWith("/actions/")) {
       try {
 
