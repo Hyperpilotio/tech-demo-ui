@@ -21,7 +21,7 @@ module.exports = () => {
   for (let deployment of ["load-controller", "spark-load-controller"]) {
     // Delete deployments deployed during the demo
     promises.push(
-      exec(`kubectl delete -f /home/app/scripts/${deployment}-deployment.json`)
+      exec(`kubectl delete -f /tmp/${deployment}-deployment.json`)
     );
   }
 
