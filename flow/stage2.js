@@ -16,4 +16,4 @@ export default (props) => (
   </div>
 )
 
-export const beforeMovingOn = () => fetch("/actions/run_spark_load_controller");
+export const beforeMovingOn = () => fetch("/actions/create_deployments?name=spark-load-controller");

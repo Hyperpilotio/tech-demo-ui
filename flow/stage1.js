@@ -16,4 +16,4 @@ export default (props) => (
   </div>
 )
 
-export const beforeMovingOn = () => fetch("/actions/run_load_controller");
+export const beforeMovingOn = () => fetch("/actions/create_deployment?name=load-controller");
