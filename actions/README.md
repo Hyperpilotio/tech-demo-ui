@@ -16,8 +16,8 @@ module.exports = () => (
 This will add an endpoint to the app at `/actions/example`, which pipes the JSON response from http://example.com/json
 
 Other examples:
-- `actions/run_qos_data_store.js`: Example of invoking REST API calls
-- `actions/create_deployment.js`: Example of invoking CLI calls
+- `actions/run_locust.js`: Example of invoking REST API calls
+- `actions/run_spark.js`: Example of invoking CLI calls
 
 
 ## API

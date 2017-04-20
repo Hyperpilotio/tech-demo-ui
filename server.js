@@ -2,7 +2,6 @@ const { createServer } = require('http');
 const { parse } = require('url');
 const child_process = require("child_process");
 const next = require('next');
-const fetch = require("isomorphic-fetch");
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -13,27 +12,16 @@ if (!dev) {
   child_process.execSync("kubectl cluster-info");
 }
 
-
-let setupDeployments = Promise.resolve();
-if (process.env.KUBE_DEPLOYMENTS !== undefined) {
-  console.log(`Downloading deployment configs from ${process.env.KUBE_DEPLOYMENTS}`);
-  setupDeployments = fetch(process.env.KUBE_DEPLOYMENTS)
-    .then(res => res.json())
-    .then(data => data.deployments.forEach(dep => {
-      fs.writeFileSync(
-        `/tmp/${dep.metadata.name}-deployment.json`,
-        JSON.stringify(dep)
-      );
-      console.info(`Written into /tmp/${dep.metadata.name}-deployment.json`);
-    }));
-}
-
-setupDeployments
-.then(() => app.prepare())
+app.prepare()
 .then(() => {
   createServer((req, res) => {
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
+
+    if (dev && pathname.startsWith("/grafana/")) {
+      res.end("Will be replaced by a Grafana panel");
+      return;
+    }
 
     if (pathname.startsWith("/actions/")) {
       try {
@@ -47,7 +35,7 @@ setupDeployments
           handle
             .catch(reason => {
               res.statusCode = 500;
-              console.error(`ERROR when ${req.method} ${parsedUrl.path}`);
+              console.error(`ERROR when ${req.method} ${pathname}`);
               console.error(`${reason.name}:\n    ${reason.message}`);
               return reason;
             })

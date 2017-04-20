@@ -22,13 +22,6 @@
 - `yarn install`
 - `yarn run dev`
 
-## Enviroment Variables
-- `NODE_ENV`: `production` or anything else. If it's not `production`:
-    * Mocked Grafana panels are used
-    * Skips errors when doing actions
-    * `actions/get_status_indicators` returns mocked responses
-- `KUBE_DEPLOYMENTS`: A URL to a JSON file
-    * The JSON have a `deployments` key, which it's value is an array of Kubernetes deployments, see [example](https://s3-us-west-1.amazonaws.com/hyperpilot-adrianliaw/demo-deployments.json)
 
 ## Folder Structure
 
