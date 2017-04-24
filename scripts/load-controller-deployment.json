@@ -32,6 +32,13 @@
                     {
                         "image": "hyperpilot\/locust-load-controller",
                         "name": "load-controller",
+                        "ports": [
+                            {
+                                "containerPort": 8001,
+                                "hostPort": 8001,
+                                "protocol": "TCP"
+                            }
+                        ],
                         "args": [
                             "--master-host",
                             "locust-master",
