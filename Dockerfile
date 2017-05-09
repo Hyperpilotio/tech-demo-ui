@@ -3,7 +3,7 @@ FROM node:6-alpine
 RUN apk add --update nginx openssl curl
 RUN wget http://yarnpkg.org/latest.tar.gz && \
     tar -xzf latest.tar.gz
-RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x kubectl && mv kubectl /usr/local/bin
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.6.2/bin/linux/amd64/kubectl && chmod +x kubectl && mv kubectl /usr/local/bin
 
 ENV PATH $PATH:/dist/bin
 
