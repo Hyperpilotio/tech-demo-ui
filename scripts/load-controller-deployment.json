@@ -30,13 +30,13 @@
                 },
                 "containers": [
                     {
-                        "image": "aasssddd\/load-test",
+                        "image": "hyperpilot/slow-cooker-load-controller",
                         "name": "load-controller",
                         "args": [
                             "--slow-cooker-host",
-                            "http://slow-cooker.default:8089",
+                            "http://slow-cooker.default.svc.cluster.local:8089",
                             "--host",
-                            "http://goddd.default:8080"
+                            "http://goddd.default.svc.cluster.local:8080"
                         ],
                         "resources": {
                             "limits": {
