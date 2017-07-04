@@ -30,20 +30,13 @@
                 },
                 "containers": [
                     {
-                        "image": "hyperpilot\/locust-load-controller",
+                        "image": "hyperpilot/slow-cooker-load-controller",
                         "name": "load-controller",
-                        "ports": [
-                            {
-                                "containerPort": 8001,
-                                "hostPort": 8001,
-                                "protocol": "TCP"
-                            }
-                        ],
                         "args": [
-                            "--master-host",
-                            "locust-master",
-                            "--load-file",
-                            "https://s3.amazonaws.com/hyperpilot-resources/hi_lo_config.json"
+                            "--slow-cooker-host",
+                            "http://slow-cooker.default.svc.cluster.local:8089",
+                            "--host",
+                            "http://goddd.default.svc.cluster.local:8080"
                         ],
                         "resources": {
                             "limits": {
