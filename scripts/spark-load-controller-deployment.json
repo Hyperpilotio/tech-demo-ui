@@ -30,9 +30,12 @@
                 },
                 "containers": [
                     {
-                        "image": "hyperpilot\/spark-load-controller:multiple_jobs",
+                        "image": "hyperpilot/spark-load-controller:multiple_terasort",
                         "name": "sparkload-controller",
-                        "imagePullPolicy": "Always"
+                        "imagePullPolicy": "Always",
+                        "command": [
+                            ".\/run_jobs.sh", "6"
+                        ]
                     }
                 ]
             }
