@@ -30,7 +30,7 @@
                 },
                 "containers": [
                     {
-                        "image": "hyperpilot/spark-load-controller:multiple_terasort",
+                        "image": "hyperpilot/spark-load-controller:weighted_multiple_jobs",
                         "name": "sparkload-controller",
                         "imagePullPolicy": "Always",
                         "command": [

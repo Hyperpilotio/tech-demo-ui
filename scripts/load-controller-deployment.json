@@ -43,7 +43,7 @@
                             "--master-host",
                             "locust-master",
                             "--load-file",
-                            "https://s3.amazonaws.com/hyperpilot-resources/hi_lo_config.json"
+                            "https://s3.amazonaws.com/be-controller-resources/hi_config.json"
                         ],
                         "resources": {
                             "limits": {
